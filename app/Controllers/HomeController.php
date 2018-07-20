@@ -1,6 +1,9 @@
 <?php
+namespace App\Controllers;
 
-class HomeController extends Controller
+use App\Models\HomeModel;
+
+class HomeController extends \Core\Controller
 {
     public function __construct()
     {

@@ -1,6 +1,6 @@
 <?php
-
-class AuthModel extends Model
+namespace App\Models;
+class AuthModel extends \Core\Model
 {
     protected $table = 'users';
 

@@ -1,4 +1,7 @@
 <?php
+namespace App\Database;
+
+use PDO;
 
 class Mysql
 {
@@ -22,11 +25,11 @@ class Mysql
     {
         $this->host = 'localhost';
 
-        $this->db = 'talgat065';
+        $this->db = 'mvc_framework';
 
-        $this->user = 'talgat065';
+        $this->user = 'homestead';
 
-        $this->password = 'Talgat065';
+        $this->password = 'secret';
 
         $this->charset = 'utf8';
 

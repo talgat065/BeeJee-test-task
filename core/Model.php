@@ -1,5 +1,6 @@
 <?php
-require_once 'app/database/Mysql.php';
+namespace Core;
+use App\Database\Mysql;
 
 class Model
 {

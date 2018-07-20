@@ -1,8 +1,7 @@
 <?php
+namespace App\Models;
 
-require_once "app/libraries/SimpleImage.php";
-
-class HomeModel extends Model
+class HomeModel extends \Core\Model
 {
     protected $table = 'tasks';
 

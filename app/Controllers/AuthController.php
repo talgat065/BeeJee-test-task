@@ -1,6 +1,9 @@
 <?php
+namespace App\Controllers;
 
-class AuthController extends Controller
+use App\Models\AuthModel;
+
+class AuthController extends \Core\Controller
 {
     public function __construct()
     {
