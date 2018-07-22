@@ -1,4 +1,6 @@
 <?php
 session_start();
 
-\Core\Route::start();
+$route = new \Core\Route();
+
+$route->start($_SERVER['REQUEST_URI']);

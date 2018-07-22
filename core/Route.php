@@ -2,61 +2,94 @@
 
 namespace Core;
 
-use App\Controllers;
-use App\Models;
-
 class Route
 {
+    protected $actionMethod = 'index';
 
-    public static function start()
+    protected $controllerClass = 'Home';
+
+    private $routes;
+
+    private $params;
+
+    protected $controllersPath = 'App\\Controllers\\';
+
+    /**
+     * @param mixed $routes
+     */
+    public function setRoutes($routes)
     {
-        $controllerClass = 'Home';
+        $this->routes = $routes;
+    }
 
-        $actionMethod = 'index';
+    /**
+     * @param mixed $params
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
+    }
 
-        $pathQuery = parse_url($_SERVER['REQUEST_URI']);
+    /**
+     * @param $uri
+     */
+    protected function parseRoutes($uri)
+    {
+        $routes = explode('/', parse_url($uri, PHP_URL_PATH));
 
-        $path = $pathQuery['path'];
+        $this->setRoutes($routes);
+    }
 
-        $query = [];
+    /**
+     * @param $uri
+     * @param $parsedQueries
+     * @return mixed
+     */
+    protected function parseParams($uri)
+    {
+        $result = [];
 
-        if (! empty($pathQuery['query'])) {
-            parse_str($pathQuery['query'], $query);
+        $queries = parse_url($uri, PHP_URL_QUERY);
+
+        if (! empty($queries)) {
+            parse_str($queries, $result);
         }
 
-        $routes = explode('/', $path);
+        $this->setParams($result);
+    }
 
-        if (! empty($routes[1])) {
-            $controllerClass = $routes[1];
+    /**
+     * @param $uri
+     */
+    public function start($uri)
+    {
+        $this->parseRoutes($uri);
+
+        $this->parseParams($uri);
+
+        if (! empty($this->routes[1])) {
+            $this->controllerClass = ucfirst($this->routes[1]);
         }
 
-        if (! empty($routes[2])) {
-            $actionMethod = $routes[2];
+        if (! empty($this->routes[2])) {
+            $this->actionMethod = $this->routes[2];
         }
 
-        $modelName = $controllerClass.'Model';
+        $this->controllerClass = $this->controllersPath.$this->controllerClass.'Controller';
 
-        $controllerClass = 'App\\Controllers\\' .$controllerClass.'Controller';
-
-        $modelFile = ucfirst($modelName).'.php';
-
-        $modelPath = "app/models/".$modelFile;
-
-        $controllerFile = ucfirst($controllerClass).'.php';
-
-        $controllerPath = "app/controllers/".$controllerFile;
-
-        if (! class_exists($controllerClass)) {
+        if (! class_exists($this->controllerClass)) {
             Route::ErrorPage404();
         }
 
-        $controller = new $controllerClass();
+        $controller = new $this->controllerClass();
 
-        if (method_exists($controller, $actionMethod)) {
-            $controller->$actionMethod($query);
-        } else {
+        if (! method_exists($controller, $this->actionMethod)) {
             Route::ErrorPage404();
         }
+
+        $method = $this->actionMethod;
+
+        $controller->$method($this->params);
     }
 
     public static function ErrorPage404()
