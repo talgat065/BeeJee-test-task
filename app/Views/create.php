@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4">
             <h1>New Task</h1>
-            <form action="/home/store" method="post" role="form" enctype="multipart/form-data">
+            <form action="/task/store" method="post" role="form" enctype="multipart/form-data">
                 <input type="hidden" name="MAX_FILE_SIZE" value="300000"/>
                 <div class="form-group">
                     <label for="user_name">User Name</label>

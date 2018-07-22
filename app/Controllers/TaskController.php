@@ -18,7 +18,7 @@ class TaskController extends Controller
         $sort = isset($query['orderBy']) ? $query['orderBy'] : 'id';
         $page = isset($query['page']) ? $query['page'] : 1;
 
-        $this->view->generate('home.php', $this->model->getData($sort, $page));
+        $this->view->generate('task.php', $this->model->getData($sort, $page));
     }
 
     public function create()

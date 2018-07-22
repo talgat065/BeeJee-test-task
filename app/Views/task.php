@@ -18,7 +18,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <?php if (isset($_SESSION['user']) && $_SESSION['user'] === 'admin'): ?>
                                         <div class="btn-group">
-                                            <a class="btn btn-default" href="/home/edit/?id=<?=$task['id'];?>">Edit</a>
+                                            <a class="btn btn-default" href="/task/edit/?id=<?=$task['id'];?>">Edit</a>
                                         </div>
                                     <?php endif; ?>
                                     <small class="text-muted">

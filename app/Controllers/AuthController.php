@@ -2,8 +2,9 @@
 namespace App\Controllers;
 
 use App\Models\AuthModel;
+use Core\Controller;
 
-class AuthController extends \Core\Controller
+class AuthController extends Controller
 {
     public function __construct()
     {

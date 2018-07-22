@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <form action="/home/update" method="post" role="form" enctype="multipart/form-data">
+        <form action="/task/update" method="post" role="form" enctype="multipart/form-data">
             <legend>New Task</legend>
             <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
             <input type="hidden" name="id" value="<?=$data['id']?>" />

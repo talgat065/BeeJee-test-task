@@ -1,10 +1,11 @@
 <?php
 namespace Core;
 
-class Controller
+abstract class Controller
 {
-    public $model;
-    public $view;
+    protected $model;
+
+    protected $view;
 
     public function __construct()
     {

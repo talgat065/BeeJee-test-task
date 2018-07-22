@@ -20,7 +20,7 @@
                 <strong>Tasks</strong>
             </a>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a class="btn btn-success" type="button" href="/home/create">Create a New Task</a>
+                <a class="btn btn-success" type="button" href="/task/create">Create a New Task</a>
                 <?php if (isset($_SESSION['user']) && ! empty($_SESSION['user'])): ?>
                     <a class="btn btn-info" type="button" href="/auth/logout">Logout</a>
                 <?php else: ?>
@@ -30,6 +30,6 @@
         </div>
     </div>
 </header>
-<?php include 'app/Views/'.$contentView; ?>
+<?php require_once $contentPath; ?>
 </body>
 </html>

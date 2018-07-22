@@ -1,8 +1,9 @@
 <?php
 namespace Core;
+
 use App\Database\Mysql;
 
-class Model
+abstract class Model
 {
     protected $mysql;
 
