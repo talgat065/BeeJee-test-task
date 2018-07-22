@@ -6,7 +6,7 @@ class Route
 {
     protected $actionMethod = 'index';
 
-    protected $controllerClass = 'Home';
+    protected $controllerClass = 'Task';
 
     private $routes;
 

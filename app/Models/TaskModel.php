@@ -1,7 +1,9 @@
 <?php
 namespace App\Models;
 
-class HomeModel extends \Core\Model
+use Core\Model;
+
+class TaskModel extends Model
 {
     protected $table = 'tasks';
 

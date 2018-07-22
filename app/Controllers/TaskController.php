@@ -1,15 +1,16 @@
 <?php
 namespace App\Controllers;
 
-use App\Models\HomeModel;
+use Core\Controller;
+use App\Models\TaskModel;
 
-class HomeController extends \Core\Controller
+class TaskController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
 
-        $this->model = new HomeModel();
+        $this->model = new TaskModel();
     }
 
     public function index($query = [])
