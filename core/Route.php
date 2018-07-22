@@ -1,19 +1,25 @@
 <?php
+
 namespace Core;
+
+use App\Controllers;
+use App\Models;
 
 class Route
 {
+
     public static function start()
     {
-        $controllerName = 'Home';
+        $controllerClass = 'Home';
 
-        $actionName = 'index';
+        $actionMethod = 'index';
 
         $pathQuery = parse_url($_SERVER['REQUEST_URI']);
 
         $path = $pathQuery['path'];
 
         $query = [];
+
         if (! empty($pathQuery['query'])) {
             parse_str($pathQuery['query'], $query);
         }
@@ -21,41 +27,33 @@ class Route
         $routes = explode('/', $path);
 
         if (! empty($routes[1])) {
-            $controllerName = $routes[1];
+            $controllerClass = $routes[1];
         }
 
         if (! empty($routes[2])) {
-            $actionName = $routes[2];
+            $actionMethod = $routes[2];
         }
 
-        $modelName = $controllerName.'Model';
+        $modelName = $controllerClass.'Model';
 
-        $controllerName = $controllerName.'Controller';
+        $controllerClass = 'App\\Controllers\\' .$controllerClass.'Controller';
 
         $modelFile = ucfirst($modelName).'.php';
 
         $modelPath = "app/models/".$modelFile;
 
-        if (file_exists($modelPath)) {
-            include "app/models/".$modelFile;
-        }
-
-        $controllerFile = ucfirst($controllerName).'.php';
+        $controllerFile = ucfirst($controllerClass).'.php';
 
         $controllerPath = "app/controllers/".$controllerFile;
 
-        if (file_exists($controllerPath)) {
-            include "app/controllers/".$controllerFile;
-        } else {
+        if (! class_exists($controllerClass)) {
             Route::ErrorPage404();
         }
 
-        $controller = new $controllerName();
+        $controller = new $controllerClass();
 
-        $action = $actionName;
-
-        if (method_exists($controller, $action)) {
-            $controller->$action($query);
+        if (method_exists($controller, $actionMethod)) {
+            $controller->$actionMethod($query);
         } else {
             Route::ErrorPage404();
         }

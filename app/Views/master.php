@@ -30,6 +30,6 @@
         </div>
     </div>
 </header>
-<?php include 'app/views/'.$contentView; ?>
+<?php include 'app/Views/'.$contentView; ?>
 </body>
 </html>

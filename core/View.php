@@ -7,6 +7,9 @@ class View
 
     public function generate($contentView, $data = null)
     {
-        include 'app/views/'.$this->templateView;
+        if(is_readable('app/Views/'.$this->templateView)) {
+            include 'app/Views/'.$this->templateView;
+        }
+
     }
 }
